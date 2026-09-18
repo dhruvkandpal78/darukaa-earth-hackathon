@@ -1,0 +1,928 @@
+/* Readable controls, an always-available menu, and landscape motion extend the shared theme. */
+body {
+  background: #f3f6ed;
+}
+.app-shell {
+  background: radial-gradient(ellipse at 95% 0%, #dfebce80, transparent 40%);
+}
+.brand {
+  background: none;
+  padding: 0;
+  text-align: left;
+}
+.header-navigation {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 9;
+  background: #f8faf2e8;
+  backdrop-filter: blur(18px);
+}
+.menu-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #dce5cf;
+  border-radius: 9px;
+  background: #fff;
+  padding: 9px 11px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #42623a;
+}
+.menu-toggle:hover {
+  background: #e8f0dc;
+}
+.breadcrumb {
+  font-size: 12px;
+}
+.sidebar {
+  width: 238px;
+  padding: 28px 20px 18px;
+  overflow-y: auto;
+  background: linear-gradient(170deg, #fff 55%, #f4f7ed);
+}
+main {
+  margin-left: 238px;
+}
+.sidebar .brand {
+  font-size: 25px;
+}
+.sidebar nav button {
+  font-size: 13px;
+  padding: 14px 13px;
+}
+.sidebar nav button:hover {
+  background: #f0f5e7;
+  color: #375b36;
+  transform: translateX(3px);
+}
+.sidebar nav button.active {
+  background: #224d3b;
+  color: #f1f9e7;
+  box-shadow: 0 5px 16px #214c3b1f;
+}
+.sidebar nav button.active .nav-count {
+  background: #ffffff20;
+  color: #dcf0c2;
+}
+.sidebar nav button.active:before {
+  display: none;
+}
+.sidebar .workspace-picker strong,
+.sidebar .profile strong {
+  font-size: 12px;
+}
+.sidebar .workspace-picker small,
+.sidebar .profile small {
+  font-size: 10px;
+}
+.sidebar .help-button {
+  font-size: 11px;
+}
+.sidebar .sidebar-bottom {
+  padding-top: 28px;
+}
+/* A true modal drawer replaces hidden icon-only navigation on narrow or zoomed-in windows. */
+.nav-drawer {
+  position: fixed;
+  inset: 0 auto 0 0;
+  margin: 0;
+  padding: 32px 22px 20px;
+  width: min(310px, 88vw);
+  height: 100dvh;
+  max-height: 100dvh;
+  max-width: 88vw;
+  border: 0;
+  background: #fdfef9;
+  color: #244535;
+  box-shadow: 20px 0 80px #133d2926;
+  overflow-y: auto;
+}
+.nav-drawer[open] {
+  display: flex;
+  flex-direction: column;
+  animation: drawer-arrive 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.nav-drawer::backdrop {
+  background: #18352a70;
+  backdrop-filter: blur(7px);
+}
+.drawer-close {
+  position: absolute;
+  right: 10px;
+  top: 9px;
+}
+.nav-drawer .brand {
+  display: flex;
+  font-size: 25px;
+}
+.nav-drawer .brand > span:last-child {
+  display: inline;
+}
+.nav-drawer .workspace-label,
+.nav-drawer .nav-label {
+  display: block;
+}
+.nav-drawer .workspace-picker {
+  display: flex;
+  margin-top: 6px;
+}
+.nav-drawer nav {
+  display: grid;
+  margin-top: 0;
+  gap: 8px;
+  width: 100%;
+}
+.nav-drawer nav button {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 13px;
+  font-size: 14px;
+  padding: 15px 12px;
+}
+.nav-drawer nav button.active {
+  background: #214f3f;
+  color: #f5ffe9;
+}
+.nav-drawer .nav-count {
+  display: inline-block;
+}
+.nav-drawer .sidebar-bottom {
+  display: block;
+  margin-top: auto;
+  padding-top: 25px;
+}
+.nav-drawer .nature-note {
+  display: block;
+}
+.nav-drawer .help-button {
+  display: flex;
+  font-size: 12px;
+}
+.nav-drawer .profile {
+  display: flex;
+  justify-content: flex-start;
+}
+.nav-drawer .profile > span:not(.avatar),
+.nav-drawer .profile > svg {
+  display: block;
+}
+.nav-drawer .profile strong {
+  font-size: 12px;
+}
+.nav-drawer .profile small {
+  font-size: 10px;
+}
+.nav-drawer .nature-note p {
+  font-size: 12px;
+}
+/* Larger typography stays readable without asking people to zoom out. */
+.content {
+  padding: 34px 32px 20px;
+}
+.page-heading h1 {
+  font-size: clamp(27px, 2.4vw, 38px);
+  letter-spacing: -1.4px;
+}
+.page-heading p {
+  font-size: 13px;
+  line-height: 1.8;
+}
+.eyebrow {
+  font-size: 10px;
+  letter-spacing: 2px;
+}
+.button {
+  font-size: 12px;
+  min-height: 40px;
+  padding: 11px 15px;
+  border-radius: 8px;
+}
+.button.primary {
+  background: linear-gradient(130deg, #284e39, #32644c);
+  box-shadow: 0 5px 15px #31573b24;
+  position: relative;
+  overflow: hidden;
+}
+.button.primary:before {
+  content: "";
+  position: absolute;
+  top: -60%;
+  bottom: -60%;
+  left: -80%;
+  width: 40%;
+  background: linear-gradient(90deg, transparent, #efffd230, transparent);
+  transform: rotate(20deg);
+  transition: left 0.65s;
+}
+.button.primary:hover:before {
+  left: 140%;
+}
+.button.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px #234e3b30;
+}
+.demo-strip {
+  font-size: 11px;
+  padding: 11px 14px;
+}
+.demo-strip button {
+  font-size: 11px;
+}
+.filterbar {
+  margin: 25px 0;
+}
+.filter-tabs button {
+  font-size: 11px;
+  padding: 10px 12px;
+}
+.filter-tabs button.active {
+  padding: 9px 11px;
+}
+.search input {
+  font-size: 11px;
+  width: 170px;
+}
+.stats-grid {
+  gap: 16px;
+}
+.stat-card {
+  padding: 21px;
+  border-radius: 15px;
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s,
+    border-color 0.3s;
+  animation: card-arrive 0.75s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.stat-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 30px #29442112;
+  border-color: #bacba7;
+}
+.stat-top {
+  font-size: 12px;
+  color: #6e8064;
+}
+.stat-top svg {
+  transition: transform 0.4s;
+}
+.stat-card:hover .stat-top svg {
+  transform: rotate(-12deg) scale(1.2);
+}
+.stat-value {
+  font-size: clamp(28px, 2.8vw, 39px);
+  margin: 15px 0 16px;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+.stat-value > span.animated-value {
+  font-size: inherit;
+  color: inherit;
+  margin: 0;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  font-variant-numeric: tabular-nums;
+}
+.stat-value > span:not(.animated-value) {
+  font-size: 12px;
+  margin-left: 0;
+}
+.stat-note {
+  font-size: 10px;
+  line-height: 1.5;
+}
+.stat-card.accent {
+  background: linear-gradient(135deg, #204c3a, #34744e);
+}
+.stat-card.accent:after {
+  width: 170px;
+  height: 170px;
+  right: -86px;
+  animation: orbit-breathe 8s ease-in-out infinite;
+}
+.panel {
+  border-radius: 15px;
+  box-shadow: 0 5px 18px #30472505;
+}
+.section-heading {
+  padding: 22px 24px;
+}
+.section-heading h2 {
+  font-size: 17px;
+}
+.section-heading p {
+  font-size: 11px;
+}
+.section-heading select,
+.site-detail select {
+  font-size: 11px;
+  padding: 9px;
+}
+.map-layout {
+  grid-template-columns: minmax(0, 1fr) 275px;
+}
+.map-shell,
+.map-site-list {
+  height: 390px;
+}
+.map-key {
+  font-size: 11px;
+  border-radius: 8px;
+  padding: 11px 14px;
+  backdrop-filter: blur(10px);
+}
+.map-marker {
+  width: 32px;
+  height: 32px;
+  font-size: 11px;
+  animation: marker-beacon 4s ease-out infinite;
+}
+.map-style button {
+  font-size: 10px;
+  padding: 7px 11px;
+}
+.list-heading {
+  font-size: 10px;
+  padding: 20px 17px 12px;
+}
+.site-row {
+  padding: 16px;
+  gap: 12px;
+}
+.site-row strong {
+  font-size: 12px;
+}
+.site-row small {
+  font-size: 10px;
+  margin-top: 6px;
+}
+.site-number {
+  width: 28px;
+  height: 28px;
+  font-size: 10px;
+  transition: all 0.25s;
+}
+.site-tag {
+  font-size: 9px;
+  padding: 4px 6px;
+}
+.site-row:hover .site-number {
+  background: #335f41;
+  color: #f3fbe9;
+  transform: rotate(-6deg);
+}
+.map-list-footer {
+  font-size: 10px;
+  line-height: 1.6;
+}
+.analytics-grid {
+  margin: 25px 0;
+  gap: 22px;
+}
+.chart-wrap {
+  height: 190px;
+}
+.chart-headline strong {
+  font-size: 30px;
+}
+.chart-headline > span {
+  font-size: 10px;
+}
+.biodiversity-panel {
+  border-radius: 15px;
+  background: radial-gradient(ellipse at 90% 0%, #dcebbf, #edf3e1 60%);
+}
+.biodiversity-panel .eyebrow {
+  font-size: 9px;
+}
+.biodiversity-panel h2 {
+  font-size: 18px;
+}
+.biodiversity-body {
+  padding: 8px 23px 24px;
+}
+.biodiversity-body > div > strong {
+  font-size: 13px;
+}
+.biodiversity-body p {
+  font-size: 11px;
+}
+.nature-pill {
+  font-size: 10px;
+}
+.bio-footer {
+  font-size: 10px;
+  line-height: 1.7;
+}
+.score-ring {
+  animation: ring-arrive 1.6s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  box-shadow:
+    0 0 0 6px #769b5020,
+    0 0 0 14px #769b5008;
+}
+.project-grid {
+  gap: 20px;
+}
+.project-card {
+  border-radius: 14px;
+  animation: card-arrive 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  transition:
+    transform 0.4s,
+    box-shadow 0.4s;
+}
+.project-card:nth-child(2) {
+  animation-delay: 0.09s;
+}
+.project-card:nth-child(3) {
+  animation-delay: 0.18s;
+}
+.project-card:nth-child(4) {
+  animation-delay: 0.27s;
+}
+.project-card:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 17px 35px #34552918;
+}
+.project-landscape {
+  height: 155px;
+}
+.landscape-shape.a {
+  animation: landscape-drift 12s ease-in-out infinite alternate;
+}
+.landscape-shape.b {
+  animation: landscape-drift 17s ease-in-out infinite alternate-reverse;
+}
+.landscape-shape.c {
+  animation: landscape-drift 15s ease-in-out infinite alternate;
+}
+.project-category {
+  font-size: 10px;
+  top: 15px;
+  left: 15px;
+  padding: 6px 8px;
+}
+.landscape-coordinate {
+  font-size: 8px;
+  bottom: 15px;
+}
+.landscape-index {
+  font-size: 35px;
+}
+.project-card-body {
+  padding: 20px;
+}
+.project-title h3 {
+  font-size: 14px;
+}
+.project-title > svg {
+  transition: transform 0.3s;
+}
+.project-card:hover .project-title > svg {
+  transform: translate(3px, -3px);
+}
+.project-card-body > p {
+  font-size: 10px;
+}
+.project-card-body p.project-description {
+  font-size: 11px;
+  min-height: 40px;
+}
+.project-bottom {
+  font-size: 10px;
+  margin-top: 17px;
+  padding-top: 16px;
+}
+.project-bottom button {
+  font-size: 10px;
+  padding: 6px 8px;
+}
+.project-sites button {
+  font-size: 11px;
+  padding: 9px 0;
+}
+.project-sites button:hover {
+  color: #355e32;
+  padding-left: 5px;
+}
+.text-button {
+  font-size: 11px;
+}
+.page-footer {
+  font-size: 10px;
+  padding: 28px 0 6px;
+}
+.page-heading,
+.filterbar {
+  animation: card-arrive 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.live-dot {
+  animation: status-pulse 3s ease-in-out infinite;
+}
+.orbit-art {
+  animation: orbit-breathe 7s ease-in-out infinite;
+}
+.modal {
+  animation: modal-arrive 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+/* Motion supports the landscape theme without delaying input or page changes. */
+@keyframes card-arrive {
+  from {
+    opacity: 0;
+    transform: translateY(23px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+@keyframes landscape-drift {
+  from {
+    translate: -6px 0;
+    scale: 1;
+  }
+  to {
+    translate: 14px -9px;
+    scale: 1.08;
+  }
+}
+@keyframes orbit-breathe {
+  0%,
+  100% {
+    scale: 1;
+    rotate: -12deg;
+  }
+  50% {
+    scale: 1.1;
+    rotate: 9deg;
+  }
+}
+@keyframes status-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 3px #87a96714;
+  }
+  50% {
+    box-shadow: 0 0 0 6px #87a96705;
+  }
+}
+@keyframes marker-beacon {
+  0%,
+  100% {
+    box-shadow:
+      0 2px 10px #29452140,
+      0 0 0 0 #668e4430;
+  }
+  65% {
+    box-shadow:
+      0 2px 10px #29452140,
+      0 0 0 11px #668e4400;
+  }
+}
+@keyframes ring-arrive {
+  from {
+    opacity: 0;
+    transform: rotate(-50deg) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(0) scale(1);
+  }
+}
+@keyframes drawer-arrive {
+  from {
+    opacity: 0.3;
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes modal-arrive {
+  from {
+    opacity: 0;
+    transform: translateY(25px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+/* Adapt to actual window width rather than requiring a smaller browser zoom. */
+@media (max-width: 1190px) {
+  .content {
+    padding: 28px 24px;
+  }
+  .stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .stat-value {
+    font-size: 35px;
+  }
+  .map-layout {
+    grid-template-columns: 1fr 230px;
+  }
+  .analytics-grid {
+    grid-template-columns: 1fr;
+  }
+  .biodiversity-body {
+    flex-direction: row;
+    align-items: center;
+    gap: 25px;
+  }
+  .biodiversity-body > div:last-child {
+    position: static;
+    width: auto;
+  }
+  .biodiversity-body p {
+    display: block;
+    max-width: 330px;
+    font-size: 12px;
+  }
+  .score-ring {
+    width: 112px;
+    height: 112px;
+  }
+  .filterbar {
+    flex-wrap: wrap;
+  }
+  .filterbar .search {
+    margin-left: 0;
+  }
+  .project-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 959px) {
+  .sidebar {
+    display: none;
+  }
+  main {
+    margin-left: 0;
+    padding-bottom: 0;
+  }
+  .topbar {
+    padding: 0 22px;
+    height: 72px;
+  }
+  .content {
+    padding: 28px 22px;
+  }
+  .header-navigation {
+    gap: 12px;
+  }
+  .system-status {
+    display: flex;
+  }
+  .page-heading h1 {
+    font-size: 30px;
+  }
+  .page-heading p {
+    font-size: 13px;
+  }
+  .page-heading .button {
+    font-size: 12px;
+    padding: 10px 13px;
+    margin: 0;
+  }
+  .map-layout {
+    grid-template-columns: minmax(0, 1fr) 240px;
+  }
+  .biodiversity-panel h2 {
+    font-size: 19px;
+  }
+}
+@media (max-width: 650px) {
+  .content {
+    padding: 25px 16px 16px;
+  }
+  .topbar {
+    height: 66px;
+    padding: 0 16px;
+  }
+  .breadcrumb {
+    font-size: 0;
+    gap: 0;
+  }
+  .breadcrumb > span {
+    display: none;
+  }
+  .breadcrumb strong {
+    font-size: 12px;
+  }
+  .header-actions {
+    gap: 10px;
+  }
+  .system-status {
+    display: none;
+  }
+  .page-heading {
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .page-heading h1 {
+    font-size: 30px;
+    max-width: 100%;
+    line-height: 1.3;
+    letter-spacing: -1.1px;
+  }
+  .page-heading p {
+    font-size: 12px;
+    max-width: 100%;
+  }
+  .page-heading .button {
+    font-size: 12px;
+    padding: 10px 15px;
+  }
+  .page-heading .eyebrow {
+    font-size: 9px;
+  }
+  .demo-strip {
+    font-size: 10px;
+    gap: 8px;
+    padding: 12px;
+  }
+  .filter-tabs {
+    gap: 2px;
+  }
+  .filter-tabs button {
+    font-size: 10px;
+    padding: 9px 8px;
+  }
+  .filter-tabs button.active {
+    padding: 8px 7px;
+  }
+  .filterbar .search {
+    padding: 4px 10px;
+  }
+  .search input {
+    font-size: 12px;
+    min-height: 30px;
+  }
+  .stats-grid {
+    gap: 11px;
+  }
+  .stat-card {
+    padding: 16px 14px;
+  }
+  .stat-top {
+    font-size: 11px;
+    gap: 7px;
+  }
+  .stat-value {
+    font-size: 28px;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin: 12px 0;
+  }
+  .stat-value > span:not(.animated-value) {
+    font-size: 11px;
+  }
+  .stat-note {
+    font-size: 9px;
+    align-items: flex-start;
+  }
+  .tiny-dot {
+    margin-top: 4px;
+    flex-shrink: 0;
+  }
+  .section-heading {
+    padding: 19px 16px;
+    gap: 10px;
+  }
+  .section-heading h2 {
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  .section-heading p {
+    font-size: 10px;
+    line-height: 1.6;
+  }
+  .section-heading .button {
+    font-size: 11px;
+    min-height: 36px;
+    padding: 8px;
+  }
+  .map-layout {
+    grid-template-columns: 1fr;
+  }
+  .map-shell {
+    height: 350px;
+  }
+  .map-site-list {
+    height: 230px;
+  }
+  .map-key {
+    font-size: 10px;
+    padding: 9px 11px;
+  }
+  .chart-headline {
+    padding: 0 16px;
+    gap: 7px;
+  }
+  .chart-headline strong {
+    font-size: 28px;
+  }
+  .chart-headline > span {
+    font-size: 10px;
+  }
+  .chart-legend {
+    display: none !important;
+  }
+  .biodiversity-body {
+    padding: 6px 20px 25px;
+    gap: 23px;
+  }
+  .biodiversity-body p {
+    font-size: 11px;
+    max-width: 210px;
+  }
+  .score-ring {
+    width: 104px;
+    height: 104px;
+  }
+  .biodiversity-panel h2 {
+    font-size: 17px;
+  }
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+  .project-title h3 {
+    font-size: 16px;
+  }
+  .project-card-body > p {
+    font-size: 11px;
+  }
+  .project-card-body p.project-description {
+    font-size: 12px;
+  }
+  .project-landscape {
+    height: 165px;
+  }
+  .project-sites button {
+    font-size: 12px;
+  }
+  .page-footer {
+    font-size: 9px;
+    gap: 15px;
+  }
+  .toast {
+    bottom: 20px;
+  }
+  .form-stack input,
+  .form-stack select,
+  .form-stack textarea {
+    font-size: 16px;
+  }
+  .modal {
+    max-height: 92dvh;
+  }
+}
+@media (max-height: 780px) and (min-width: 960px) {
+  .sidebar .nature-note {
+    display: none;
+  }
+  .sidebar .sidebar-bottom {
+    padding-top: 15px;
+  }
+  .sidebar .workspace-picker {
+    margin-bottom: 20px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *:before,
+  *:after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Drawing controls remain outside the canvas so mouse and touch completion behave alike. */
+.drawing-tools {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+  padding-top: 12px;
+}
+.drawing-tools > span {
+  font-size: 11px;
+  color: #80906f;
+  margin-right: auto;
+}
+.drawing-tools .button {
+  font-size: 10px;
+  padding: 8px 10px;
+  min-height: 34px;
+}
