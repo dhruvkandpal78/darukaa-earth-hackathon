@@ -1,0 +1,8 @@
+# Python quality settings mirror local checks and the GitHub Actions pipeline.
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+exclude = [".venv", "node_modules", ".npm-cache"]
+[tool.pytest.ini_options]
+testpaths = ["backend/tests"]
+pythonpath = ["."]

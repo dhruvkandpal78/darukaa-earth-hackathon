@@ -1,0 +1,2 @@
+# Format and check only the files being committed, keeping each commit reviewable.
+npx lint-staged

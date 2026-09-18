@@ -1,0 +1,14 @@
+# Keep credentials, installed tools, and generated output out of the repository.
+node_modules/
+dist/
+.env
+.venv/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+*.tsbuildinfo
+tmp/
+.sites-runtime/
+.npm-cache/
+.python-cache/
+pytest-cache-files-*/

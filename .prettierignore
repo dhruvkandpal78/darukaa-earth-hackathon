@@ -1,0 +1,12 @@
+# Generated files and the supplied document have their own formats.
+package-lock.json
+dist
+node_modules
+.venv
+output
+tmp
+.npm-cache
+.python-cache
+pytest-cache-files-*
+*.pdf
+*.docx
