@@ -1,0 +1,24 @@
+# Render creates the Python container and PostGIS-capable PostgreSQL service from this blueprint.
+services:
+  - type: web
+    name: darukaa-earth
+    runtime: docker
+    plan: starter
+    healthCheckPath: /api/health
+    autoDeployTrigger: off
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: darukaa-database
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: ENVIRONMENT
+        value: production
+      - key: VITE_MAPBOX_TOKEN
+        sync: false
+databases:
+  - name: darukaa-database
+    plan: basic-256mb
+    postgresMajorVersion: "16"
+    ipAllowList: []

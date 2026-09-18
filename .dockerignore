@@ -1,0 +1,13 @@
+# Ship only source required by the image; never upload credentials or installed dependencies.
+.git
+.env
+.venv
+node_modules
+dist
+.npm-cache
+.python-cache
+tmp
+output
+*.pdf
+*.docx
+__pycache__

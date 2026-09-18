@@ -1,0 +1,33 @@
+# A reproducible local spatial database and full-stack app with durable database storage.
+services:
+  database:
+    image: postgis/postgis:16-3.4
+    environment:
+      POSTGRES_USER: darukaa
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-darukaa}
+      POSTGRES_DB: darukaa
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - database-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U darukaa"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+  app:
+    build:
+      context: .
+      args:
+        VITE_MAPBOX_TOKEN: ${VITE_MAPBOX_TOKEN:-}
+    environment:
+      DATABASE_URL: postgresql+psycopg://darukaa:${POSTGRES_PASSWORD:-darukaa}@database:5432/darukaa
+      JWT_SECRET: ${JWT_SECRET:?Set a random JWT_SECRET in .env}
+      ENVIRONMENT: production
+    ports:
+      - "127.0.0.1:8000:8000"
+    depends_on:
+      database:
+        condition: service_healthy
+volumes:
+  database-data:

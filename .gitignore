@@ -12,3 +12,5 @@ tmp/
 .npm-cache/
 .python-cache/
 pytest-cache-files-*/
+# Submission drafts and renderer intermediates are local artifacts, not application source.
+output/
