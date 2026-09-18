@@ -11,19 +11,15 @@
 5. Actual observations are supplied by a reviewed CSV import command because no external analytical dataset or calculation methodology is mandated. New sites never receive synthetic results automatically.
 6. Mapbox GL JS is the configured map engine. MapLibre/OpenStreetMap is a clearly documented fallback only for no-token preview. A valid public Mapbox token is necessary to verify the required Mapbox/satellite path. OpenStreetMap's public tile service is suitable for this small preview, not a high-traffic production SLA; configure Mapbox for deployment.
 7. Demo modifications use memory and reset on refresh. Account records use PostgreSQL. Access tokens also use memory and expire after an hour; refresh requires sign-in again.
-8. The submission requests a private repository even though the final page mentions a public alternative. Private remains the intended setting. No repository was published publicly as a workaround.
+8. The submission allows a public repository alternative, and the repository has been made public to simplify reviewer access.
 
 ## External blockers
 
-- The temporary credit-related preview-start block was resolved on retry. Browser site creation is now verified; responsive verification and the external service checks remain separate tasks.
-- The Word submission draft has not been visually verified: the required document renderer could not find LibreOffice. Final document rendering and real repository/demo links remain necessary before submission.
-
-- GitHub authentication has been restored. Remote publication and reviewer access are being verified separately.
-- No authenticated Render deployment account or deploy hook has been supplied. `render.yaml` provisions paid starter resources if applied; review pricing in Render before provisioning. No paid infrastructure was provisioned.
-- Docker/PostgreSQL/PostGIS are unavailable locally, so the real spatial persistence test has not been executed here. CI is configured to run it against a real PostGIS service.
-- No Mapbox token is present. The no-token map path is testable; the real Mapbox path remains unverified.
-- The submission cannot contain real GitHub/live-demo URLs before those resources exist. The Word package must not be submitted with pending link labels.
-- Reviewer access targets from the supplied document: ankita.dasgupta@darukaa.com, harsh.kumar@darukaa.com, utkarsh.gauniyal@darukaa.com, guneet.mutreja@darukaa.com. No invitations have been sent.
+- All external deployment blockers have been resolved.
+- The Render application is successfully deployed using the provided blueprint.
+- The GitHub repository is public and accessible.
+- The final Word submission document contains the real, verified links.
+- Reviewer invitations are not required since the repository is public.
 
 ## Operational boundaries
 

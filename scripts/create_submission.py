@@ -38,7 +38,7 @@ def create_submission(repository: str, demo: str, draft: bool = False):
         "Darukaa Earth organizes carbon and biodiversity projects, maps their geographic sites, and displays performance over time. This overview gives reviewers the application links, technical structure, setup path, and deployment requirements."
     )
     document.add_heading("Review links", 1)
-    document.add_paragraph(f"Private GitHub repository: {repository}")
+    document.add_paragraph(f"Public GitHub repository: {repository}")
     document.add_paragraph(f"Public live demo: {demo}")
     document.add_paragraph(
         "API documentation after deployment: append /api/docs to the live demo URL. Local sample preview: http://127.0.0.1:5173. Full local application: http://127.0.0.1:8000."
@@ -60,12 +60,12 @@ def create_submission(repository: str, demo: str, draft: bool = False):
     )
     document.add_heading("Reviewer access and data", 1)
     document.add_paragraph(
-        "For a private repository, grant access to ankita.dasgupta@darukaa.com, harsh.kumar@darukaa.com, utkarsh.gauniyal@darukaa.com, and guneet.mutreja@darukaa.com. Reviewers can register their own application account; no shared production password is supplied. The sample portfolio uses explicitly labeled synthetic observations and approximate boundaries, not certified carbon or biodiversity measurements."
+        "The repository has been made public for easy access by the reviewers. Reviewers can register their own application account; no shared production password is supplied. The sample portfolio uses explicitly labeled synthetic observations and approximate boundaries, not certified carbon or biodiversity measurements."
     )
     document.add_heading("Completion notes", 1)
     if draft:
         document.add_paragraph(
-            "Repository access and live deployment remain pending account configuration. This draft must not be submitted until the real links are included and deployment is verified. The source includes deployment configuration and a requirement checklist in README.md."
+            "This draft must not be submitted until the real links are included and deployment is verified. The source includes deployment configuration and a requirement checklist in README.md."
         )
     else:
         document.add_paragraph(

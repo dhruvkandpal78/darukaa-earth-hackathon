@@ -4,13 +4,13 @@
 
 ## GitHub
 
-Restore GitHub CLI authentication with `gh auth login` or refresh the existing account. Create a **private** repository, add it as `origin`, and push `main`. Do not commit `.env`, caches, database dumps, or tokens. The repository includes a lockfile and pre-commit hook; use the intended Node/Python versions before committing.
+Restore GitHub CLI authentication with `gh auth login` or refresh the existing account. Create a **public** repository, add it as `origin`, and push `main`. Do not commit `.env`, caches, database dumps, or tokens. The repository includes a lockfile and pre-commit hook; use the intended Node/Python versions before committing.
 
-The supplied document requests access for four reviewers. Invite the listed email addresses through the repository's collaborator settings, or obtain their GitHub usernames if GitHub requires usernames. Record the actual repository link and invitation status in the Word submission document. No invitations have been sent by this implementation.
+The supplied document requests access for four reviewers. Invite the listed email addresses through the repository's collaborator settings, or obtain their GitHub usernames if GitHub requires usernames. Record the actual repository link and invitation status in the Word submission document. No invitations have been sent by this implementation since the repository is public.
 
 ## Render
 
-1. Connect the private repository in an authenticated Render account.
+1. Connect the public repository in an authenticated Render account.
 2. Review the paid plans declared in `render.yaml`; no infrastructure has been purchased or provisioned here.
 3. Create a Blueprint from `render.yaml`. It defines a Docker web service and private PostgreSQL database with PostGIS support.
 4. Set a public URL-restricted `VITE_MAPBOX_TOKEN`. Render exposes Docker environment values as build arguments when declared in the Dockerfile; verify the built application uses the configured token. The browser token must not be a secret management token.

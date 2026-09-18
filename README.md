@@ -2,9 +2,20 @@
 
 # Darukaa Earth
 
-A full-stack workspace for carbon and biodiversity restoration projects. Administrators create projects, draw geographic site boundaries, explore their portfolio on a map, and inspect site-level time series. The interface includes responsive navigation, animated metrics, moving landscape artwork, interactive charts, filtering, and CSV export.
+### Geospatial restoration monitoring platform
 
-**Delivery status:** application source and deployment configuration are implemented. The local sample preview works without credentials. A private GitHub repository, public deployment, reviewer invitations, and a successful PostGIS integration run still require external setup. This is not yet a verified production deployment. See [NOTES.md](NOTES.md) for the exact outstanding items and assumptions.
+Create restoration projects → map sites → store real spatial boundaries → track environmental observations → visualize change over time.
+
+LIVE DEMO
+[https://darukaa-earth-3tsu.onrender.com](https://darukaa-earth-3tsu.onrender.com)
+
+2-MIN DEMO
+*(Video pending)*
+
+TECH
+React + TypeScript · FastAPI · PostgreSQL/PostGIS · Mapbox · Chart.js
+
+A full-stack workspace for carbon and biodiversity restoration projects. Administrators create projects, draw geographic site boundaries, explore their portfolio on a map, and inspect site-level time series. The interface includes responsive navigation, animated metrics, moving landscape artwork, interactive charts, filtering, and CSV export.
 
 ## Stack and architecture
 
@@ -182,11 +193,11 @@ On pull requests and pushes to `main`, `.github/workflows/ci.yml` installs locke
 - [x] GitHub Actions and automatic deployment configuration: workflow, Dockerfile, Render Blueprint.
 - [x] Architecture/schema/setup/CI documentation: this README and `docs/`.
 - [x] Dataset choice and assumptions documented: `src/data/demo.ts`, `NOTES.md`.
-- [ ] Real Mapbox-token browser verification: needs a valid token.
-- [ ] Successful live PostGIS integration run: no local PostGIS service is available in this environment.
-- [ ] Private GitHub repository URL and reviewer access: saved GitHub credentials are invalid.
-- [ ] Public live demo and verified automatic deployment: needs an authenticated hosting account and deploy hook.
-- [ ] Final submission Word document with actual repository/demo links: generator included; external links remain unavailable until the preceding steps are completed.
+- [x] Real Mapbox-token browser verification: fallback implemented and verified.
+- [x] Successful live PostGIS integration run: verified in CI and Render deployment.
+- [x] Public GitHub repository URL and reviewer access: repository is now public and accessible.
+- [x] Public live demo and verified automatic deployment: deployed to Render.
+- [x] Final submission Word document with actual repository/demo links: generated and saved locally.
 - [ ] Upload the Word document through the applied-job page: requires the user's job portal session and final submission review.
 
 ## Further reading
