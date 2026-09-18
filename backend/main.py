@@ -1,9 +1,11 @@
 """FastAPI routes enforce ownership and serve the built React website in production."""
 
 from pathlib import Path
+import secrets
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, Depends, HTTPException, Request
-from fastapi.responses import FileResponse, JSONResponse
+from fastapi.responses import FileResponse, JSONResponse, HTMLResponse
+from fastapi.openapi.docs import get_swagger_ui_html
 from fastapi.staticfiles import StaticFiles
 from sqlalchemy import select, func, cast, text
 from sqlalchemy.exc import IntegrityError
@@ -30,7 +32,8 @@ app = FastAPI(
     title="Darukaa Earth API",
     version="1.0.0",
     lifespan=lifespan,
-    docs_url="/api/docs",
+    docs_url=None,
+    redoc_url=None,
     openapi_url="/api/openapi.json",
 )
 
@@ -38,6 +41,9 @@ app = FastAPI(
 @app.middleware("http")
 async def response_protection(request: Request, call_next):
     """Limit payload size and stop browsers caching private portfolio responses."""
+    # Only the API guide gets permission to run its own small startup script.
+    # A fresh unpredictable value prevents unrelated inline scripts from sharing it.
+    request.state.docs_nonce = secrets.token_urlsafe(24)
     length = request.headers.get("content-length", "0")
     if not length.isdigit() or int(length) > 1_000_000:
         return JSONResponse({"detail": "Request is too large."}, status_code=413)
@@ -57,9 +63,26 @@ async def response_protection(request: Request, call_next):
     response.headers["Content-Security-Policy"] = (
         "default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://*.mapbox.com https://tile.openstreetmap.org; connect-src 'self' https://*.mapbox.com https://tile.openstreetmap.org; worker-src 'self' blob:; child-src blob:; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
     )
+    if request.url.path == "/api/docs":
+        response.headers["Content-Security-Policy"] = response.headers[
+            "Content-Security-Policy"
+        ].replace("script-src 'self'", f"script-src 'self' 'nonce-{request.state.docs_nonce}'")
     if request.url.path.startswith("/api"):
         response.headers["Cache-Control"] = "no-store"
     return response
+
+
+@app.get("/api/docs", include_in_schema=False)
+def api_documentation(request: Request):
+    """Keep the interactive API guide usable without relaxing the dashboard's script policy."""
+    page = get_swagger_ui_html(
+        openapi_url="/api/openapi.json",
+        title="Darukaa Earth API documentation",
+        swagger_favicon_url="/favicon.svg",
+    )
+    return HTMLResponse(
+        page.body.decode().replace("<script>", f'<script nonce="{request.state.docs_nonce}">')
+    )
 
 
 @app.get("/api/health")

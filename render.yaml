@@ -3,7 +3,7 @@ services:
   - type: web
     name: darukaa-earth
     runtime: docker
-    plan: starter
+    plan: free
     healthCheckPath: /api/health
     autoDeployTrigger: off
     envVars:
@@ -19,6 +19,7 @@ services:
         sync: false
 databases:
   - name: darukaa-database
-    plan: basic-256mb
+    # User-authorized zero-cost demo: this database expires after 30 days.
+    plan: free
     postgresMajorVersion: "16"
     ipAllowList: []
